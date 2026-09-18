@@ -2,12 +2,57 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="refresh" content="0; url=index-standalone.html">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#050505">
 <title>Farzad Najafi — Portfolio</title>
-<script>location.replace("index-standalone.html");</script>
+<style>
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
+#site{display:block;width:100%;height:100%;border:0}
+</style>
 </head>
 <body>
-<p>در حال انتقال به پورتفولیو...</p>
+<iframe id="site" src="index-standalone.html" title="Farzad Najafi Portfolio"></iframe>
+<script>
+(function(){
+  const frame=document.getElementById('site');
+  frame.addEventListener('load',function(){
+    try{
+      const d=frame.contentDocument;
+      if(!d) return;
+      const s=d.createElement('style');
+      s.id='farzad-mobile-fix';
+      s.textContent=`
+        @media (max-width:620px){
+          html,body{overflow-x:hidden!important}
+          #ambient{display:block!important}
+          #ambient .float{display:block!important;opacity:.48!important;filter:drop-shadow(0 10px 22px rgba(0,0,0,.45))!important;pointer-events:none!important}
+          #ambient .f1{width:76px!important;left:-20px!important;top:16%!important}
+          #ambient .f2{width:86px!important;right:-10px!important;top:9%!important}
+          #ambient .f3{width:58px!important;left:2%!important;top:69%!important}
+          #ambient .f4{width:70px!important;right:2%!important;top:55%!important}
+          #ambient .f5{width:54px!important;right:25%!important;top:22%!important}
+          #ambient .f6{width:72px!important;left:27%!important;top:73%!important}
+          .glass{backdrop-filter:blur(16px) saturate(135%)!important;-webkit-backdrop-filter:blur(16px) saturate(135%)!important}
+          .hero-visual{min-height:440px!important}
+          .motion-shell{inset:9% -7% 4%!important}
+          .portrait-wrap{height:450px!important;width:92%!important}
+          .glass-label{right:-2%!important;bottom:9%!important;min-width:175px!important}
+          section{padding:78px 0!important}
+          .section-title{font-size:clamp(34px,10vw,52px)!important}
+          .about-copy{padding:28px!important}
+          .about-photo{height:430px!important}
+          .quote{font-size:17px!important;line-height:2!important}
+          .service{min-height:170px!important}
+          .order-intro h2{font-size:42px!important}
+          .mobile-panel{padding-top:92px!important}
+        }
+      `;
+      d.head.appendChild(s);
+      const v=d.querySelector('video');
+      if(v){v.setAttribute('playsinline','');v.setAttribute('webkit-playsinline','');}
+    }catch(e){}
+  });
+})();
+</script>
 </body>
 </html>
