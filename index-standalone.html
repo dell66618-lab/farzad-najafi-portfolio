@@ -14,126 +14,76 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
 <iframe id="portfolio" src="portfolio-original.html" title="Farzad Najafi Portfolio"></iframe>
 <script>
 (function(){
- const frame=document.getElementById('portfolio');
- const serviceIcons=[
- '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 34 20 10h8l12 24M13 26h22M18 34l6-12 6 12"/></svg>',
- '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 6 40 15v18L24 42 8 33V15zM8 15l16 9 16-9M24 24v18"/></svg>',
- '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 7 39 20 24 41 9 20zM9 20h30M18 20l6 21 6-21M18 12h12"/></svg>',
- '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M9 12h30v24H9zM15 19h18M15 25h12M15 31h8M34 7v10M29 12h10"/></svg>',
- '<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="7" y="10" width="34" height="27" rx="4"/><path d="M7 17h34M14 13.5h.1M19 13.5h.1M16 25h16M16 30h10"/></svg>',
- '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 6 41 17v14L24 42 7 31V17zM17 24h14M24 17v14"/></svg>',
- '<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="8" y="8" width="32" height="32" rx="9"/><circle cx="24" cy="24" r="8"/><path d="M34 14h.1"/></svg>',
- '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 16 24 7l16 9v16l-16 9L8 32zM8 16l16 9 16-9M24 25v16M16 12l16 9"/></svg>',
- '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 6v36M6 24h36M11 11l26 26M37 11 11 37"/><circle cx="24" cy="24" r="14"/></svg>'
- ];
- const serviceCSS=`
- #services .service-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
- #services .service{isolation:isolate;position:relative;overflow:hidden;min-height:250px;padding:27px 27px 30px;border:1px solid rgba(255,255,255,.12);border-radius:27px;background:#111518 center/cover no-repeat;box-shadow:0 16px 42px rgba(0,0,0,.18),inset 0 1px rgba(255,255,255,.035);transition:transform .35s cubic-bezier(.2,.75,.2,1),border-color .35s ease,box-shadow .35s ease;background-position:center}
- #services .service:nth-child(1){background-image:linear-gradient(120deg,rgba(7,10,12,.95) 5%,rgba(7,10,12,.72) 48%,rgba(7,10,12,.28)),url('https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=1200&q=88')}
- #services .service:nth-child(2){background-image:linear-gradient(120deg,rgba(7,10,12,.94) 5%,rgba(7,10,12,.68) 48%,rgba(7,10,12,.25)),url('https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=88')}
- #services .service:nth-child(3){background-image:linear-gradient(120deg,rgba(7,10,12,.94) 5%,rgba(7,10,12,.66) 48%,rgba(7,10,12,.24)),url('https://images.unsplash.com/photo-1634942536790-2534a7f4a9f5?auto=format&fit=crop&w=1200&q=88')}
- #services .service:nth-child(4){background-image:linear-gradient(120deg,rgba(7,10,12,.94) 5%,rgba(7,10,12,.68) 48%,rgba(7,10,12,.24)),url('https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1200&q=88')}
- #services .service:nth-child(5){background-image:linear-gradient(120deg,rgba(7,10,12,.95) 5%,rgba(7,10,12,.70) 48%,rgba(7,10,12,.25)),url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=88')}
- #services .service:nth-child(6){background-image:linear-gradient(120deg,rgba(7,10,12,.94) 5%,rgba(7,10,12,.67) 48%,rgba(7,10,12,.23)),url('https://images.unsplash.com/photo-1504270997636-07ddfbd48945?auto=format&fit=crop&w=1200&q=88')}
- #services .service:nth-child(7){background-image:linear-gradient(120deg,rgba(7,10,12,.94) 5%,rgba(7,10,12,.66) 48%,rgba(7,10,12,.24)),url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1200&q=88')}
- #services .service:nth-child(8){background-image:linear-gradient(120deg,rgba(7,10,12,.94) 5%,rgba(7,10,12,.68) 48%,rgba(7,10,12,.25)),url('https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&w=1200&q=88')}
- #services .service:nth-child(9){background-image:linear-gradient(120deg,rgba(7,10,12,.94) 5%,rgba(7,10,12,.68) 48%,rgba(7,10,12,.25)),url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1200&q=88')}
- #services .service:before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(135deg,rgba(181,255,46,.10),transparent 38%,rgba(255,255,255,.035) 70%,transparent);pointer-events:none}
- #services .service:after{content:"";position:absolute;width:210px;height:210px;left:-85px;bottom:-105px;border-radius:50%;border:1px solid rgba(181,255,46,.13);box-shadow:0 0 0 26px rgba(181,255,46,.025),0 0 0 52px rgba(181,255,46,.018);pointer-events:none}
- #services .service:hover{transform:translateY(-8px) scale(1.012);border-color:rgba(181,255,46,.42);box-shadow:0 25px 55px rgba(0,0,0,.30),0 0 34px rgba(181,255,46,.055)}
- #services .service .n{position:absolute;top:22px;left:23px;font-size:10px;letter-spacing:.18em;color:#c8ff64;background:rgba(8,12,14,.56);border:1px solid rgba(181,255,46,.24);border-radius:999px;padding:7px 10px;backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
- #services .service .service-icon{position:relative;width:61px;height:61px;display:grid;place-items:center;border-radius:18px;margin-bottom:25px;background:linear-gradient(145deg,rgba(22,28,30,.76),rgba(7,11,13,.52));border:1px solid rgba(255,255,255,.11);box-shadow:inset 0 1px rgba(255,255,255,.08),0 12px 24px rgba(0,0,0,.20);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
- #services .service .service-icon:after{content:"";position:absolute;inset:5px;border-radius:14px;border:1px solid rgba(181,255,46,.10);pointer-events:none}
- #services .service .service-icon svg{width:32px;height:32px;fill:none;stroke:#b8ff3b;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 8px rgba(166,255,0,.15))}
- #services .service h3{font-size:clamp(17px,1.4vw,21px);margin:0 0 9px;line-height:1.65;position:relative;text-shadow:0 3px 15px rgba(0,0,0,.7)}
- #services .service h3:after{content:"";display:block;width:34px;height:2px;margin-top:10px;border-radius:3px;background:#b8ff3b;opacity:.72;box-shadow:0 0 12px rgba(181,255,46,.18)}
- #services .service p{font-size:12px;line-height:2;color:#c8ced1;max-width:35ch;margin:0;text-shadow:0 3px 12px rgba(0,0,0,.8)}
- #services .service .arrow{left:24px;bottom:21px;font-size:20px;color:#b8ff3b;opacity:.9;transition:transform .3s ease}
- #services .service:hover .arrow{transform:translate(-4px,-4px)}
- @media(max-width:1000px){#services .service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#services .service{min-height:225px}}
- @media(max-width:620px){#services .service-grid{grid-template-columns:1fr;gap:12px}#services .service{min-height:0;padding:22px 20px 25px;border-radius:22px;background-position:center 45%}#services .service .service-icon{width:52px;height:52px;margin-bottom:17px;border-radius:15px}#services .service .service-icon svg{width:28px;height:28px}#services .service .n{top:18px;left:18px}#services .service h3{font-size:18px;margin-bottom:6px}#services .service p{font-size:12px;padding-left:15px}#services .service .arrow{left:18px;bottom:17px}}
- @media(prefers-reduced-motion:reduce){#services .service,#services .service .arrow{transition:none}}
-`;
- function patchDocument(d){
-    if(!d)return;
-    try{
-      if(!d.getElementById('premium-service-cards')){const style=d.createElement('style');style.id='premium-service-cards';style.textContent=serviceCSS;(d.head||d.documentElement).appendChild(style);}
-      const about=d.querySelector('#about .about-photo img');
-      if(about){about.removeAttribute('srcset');about.src='assets/about-personal.jpg?v=20260919';about.alt='Farzad Najafi';about.style.objectFit='cover';about.style.objectPosition='center center';}
-      const poster=d.querySelector('#works .poster-card img,.poster-card img');
-      if(poster){poster.removeAttribute('srcset');poster.src='https://github.com/user-attachments/assets/3d49b504-bdc3-405f-84a0-7fbe848a8089';poster.alt='پوستر به‌روزشده طلا و جواهر Classic';}
-      d.querySelectorAll('#services .service').forEach((card,i)=>{
-        if(card.querySelector('.service-icon'))return;
-        const icon=d.createElement('div');icon.className='service-icon';icon.innerHTML=serviceIcons[i]||serviceIcons[8];
-        const number=card.querySelector('.n'); if(number)number.insertAdjacentElement('afterend',icon); else card.prepend(icon);
-      });
-      const contact=d.querySelector('#contact');
-      if(contact && !d.getElementById('farzad-contact-final')){
-        const cs=d.createElement('style');cs.id='farzad-contact-final';cs.textContent=`
-#contact{position:relative;overflow:hidden!important;border:1px solid rgba(184,255,59,.24)!important;border-radius:30px!important;background:linear-gradient(135deg,#151a1d 0%,#0a0d0f 100%)!important;box-shadow:0 24px 70px rgba(0,0,0,.34),inset 0 1px rgba(255,255,255,.06)!important;padding:clamp(28px,4vw,52px)!important}
-#contact:before{content:"";position:absolute;inset:-35%;background:radial-gradient(circle at 18% 28%,rgba(184,255,59,.14),transparent 25%),radial-gradient(circle at 82% 72%,rgba(184,255,59,.055),transparent 22%);pointer-events:none}
-#contact>*{position:relative;z-index:1}
-#contact h2,#contact h3{font-size:clamp(25px,3vw,38px)!important;letter-spacing:-.02em;margin-bottom:12px!important}
-#contact a{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:14px!important;min-height:58px!important;padding:14px 18px!important;margin:10px 0!important;border:1px solid rgba(255,255,255,.11)!important;border-radius:16px!important;background:rgba(255,255,255,.035)!important;color:#f4f6f7!important;text-decoration:none!important;transition:all .25s ease!important}
-#contact a:hover{transform:translateY(-3px)!important;border-color:rgba(184,255,59,.45)!important;background:rgba(184,255,59,.07)!important;box-shadow:0 14px 30px rgba(0,0,0,.25),0 0 22px rgba(184,255,59,.06)!important}
-#contact a::after{content:"↗";color:#b8ff3b;font-size:20px;font-weight:700}
-#contact:after{content:"LET’S CREATE SOMETHING GREAT";position:absolute;right:28px;bottom:20px;color:rgba(184,255,59,.42);font-size:9px;letter-spacing:.2em;pointer-events:none}
-@media(max-width:620px){#contact{border-radius:22px!important;padding:24px 18px!important}#contact a{min-height:52px!important;font-size:13px!important}#contact:after{font-size:7px;right:18px;bottom:13px}}
-`;d.head.appendChild(cs);
-        const links=[...contact.querySelectorAll('a')];links.forEach(a=>{a.setAttribute('aria-label',a.textContent.trim()||'ارتباط با فرزاد نجفی');});
-      }
-      const contact=d.querySelector('#contact');
-      if(contact && !d.getElementById('farzad-contact-final')){
-        const cs=d.createElement('style');cs.id='farzad-contact-final';cs.textContent=`
-#contact{position:relative;overflow:hidden!important;border:1px solid rgba(184,255,59,.24)!important;border-radius:30px!important;background:linear-gradient(135deg,#151a1d 0%,#0a0d0f 100%)!important;box-shadow:0 24px 70px rgba(0,0,0,.34),inset 0 1px rgba(255,255,255,.06)!important;padding:clamp(28px,4vw,52px)!important}
-#contact:before{content:"";position:absolute;inset:-35%;background:radial-gradient(circle at 18% 28%,rgba(184,255,59,.14),transparent 25%),radial-gradient(circle at 82% 72%,rgba(184,255,59,.055),transparent 22%);pointer-events:none}
-#contact>*{position:relative;z-index:1}
-#contact h2,#contact h3{font-size:clamp(25px,3vw,38px)!important;letter-spacing:-.02em;margin-bottom:12px!important}
-#contact a{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:14px!important;min-height:58px!important;padding:14px 18px!important;margin:10px 0!important;border:1px solid rgba(255,255,255,.11)!important;border-radius:16px!important;background:rgba(255,255,255,.035)!important;color:#f4f6f7!important;text-decoration:none!important;transition:all .25s ease!important}
-#contact a:hover{transform:translateY(-3px)!important;border-color:rgba(184,255,59,.45)!important;background:rgba(184,255,59,.07)!important;box-shadow:0 14px 30px rgba(0,0,0,.25),0 0 22px rgba(184,255,59,.06)!important}
-#contact a::after{content:"↗";color:#b8ff3b;font-size:20px;font-weight:700}
-#contact:after{content:"LET’S CREATE SOMETHING GREAT";position:absolute;right:28px;bottom:20px;color:rgba(184,255,59,.42);font-size:9px;letter-spacing:.2em;pointer-events:none}
-@media(max-width:620px){#contact{border-radius:22px!important;padding:24px 18px!important}#contact a{min-height:52px!important;font-size:13px!important}#contact:after{font-size:7px;right:18px;bottom:13px}}
-`;d.head.appendChild(cs);
-        const links=[...contact.querySelectorAll('a')];links.forEach(a=>{a.setAttribute('aria-label',a.textContent.trim()||'ارتباط با فرزاد نجفی');});
-      }
-    }catch(e){console.error('Portfolio patch failed',e);}
+var frame=document.getElementById('portfolio');
+var FINAL='https://github.com/user-attachments/assets/3d49b504-bdc3-405f-84a0-7fbe848a8089?v=20260919-final';
+var imgs=[
+'https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=1200&q=88',
+'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=88',
+'https://images.unsplash.com/photo-1634942536790-2534a7f4a9f5?auto=format&fit=crop&w=1200&q=88',
+'https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1200&q=88',
+'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=88',
+'https://images.unsplash.com/photo-1504270997636-07ddfbd48945?auto=format&fit=crop&w=1200&q=88',
+'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1200&q=88',
+'https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&w=1200&q=88',
+'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1200&q=88'
+];
+var icons=[
+'<svg viewBox="0 0 48 48"><path d="M8 34 20 10h8l12 24M13 26h22M18 34l6-12 6 12"/></svg>',
+'<svg viewBox="0 0 48 48"><path d="M24 6 40 15v18L24 42 8 33V15zM8 15l16 9 16-9M24 24v18"/></svg>',
+'<svg viewBox="0 0 48 48"><path d="M24 7 39 20 24 41 9 20zM9 20h30M18 20l6 21 6-21M18 12h12"/></svg>',
+'<svg viewBox="0 0 48 48"><path d="M9 12h30v24H9zM15 19h18M15 25h12M15 31h8"/></svg>',
+'<svg viewBox="0 0 48 48"><rect x="7" y="10" width="34" height="27" rx="4"/><path d="M7 17h34M16 25h16M16 30h10"/></svg>',
+'<svg viewBox="0 0 48 48"><path d="M24 6 41 17v14L24 42 7 31V17zM17 24h14M24 17v14"/></svg>',
+'<svg viewBox="0 0 48 48"><rect x="8" y="8" width="32" height="32" rx="9"/><circle cx="24" cy="24" r="8"/></svg>',
+'<svg viewBox="0 0 48 48"><path d="M8 16 24 7l16 9v16l-16 9L8 32zM8 16l16 9 16-9M24 25v16"/></svg>',
+'<svg viewBox="0 0 48 48"><path d="M24 6v36M6 24h36M11 11l26 26M37 11 11 37"/><circle cx="24" cy="24" r="14"/></svg>'
+];
+var css=[
+'#services .service-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:18px!important}',
+'#services .service{position:relative!important;overflow:hidden!important;min-height:250px!important;padding:27px!important;border:1px solid rgba(255,255,255,.12)!important;border-radius:27px!important;background-color:#111518!important;background-position:center!important;background-size:cover!important;box-shadow:0 18px 48px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.05)!important;transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease!important}',
+'#services .service:hover{transform:translateY(-8px)!important;border-color:rgba(184,255,59,.48)!important;box-shadow:0 28px 65px rgba(0,0,0,.38),0 0 28px rgba(184,255,59,.08)!important}',
+'#services .service .service-visual{display:none!important}',
+'#services .service .service-icon{position:relative!important;width:60px!important;height:60px!important;display:grid!important;place-items:center!important;border-radius:17px!important;margin-bottom:24px!important;background:rgba(8,12,14,.62)!important;border:1px solid rgba(255,255,255,.14)!important;box-shadow:inset 0 1px rgba(255,255,255,.08),0 12px 28px rgba(0,0,0,.28)!important;backdrop-filter:blur(9px)!important}',
+'#services .service .service-icon svg{width:31px!important;height:31px!important;fill:none!important;stroke:#b8ff3b!important;stroke-width:1.7!important;stroke-linecap:round!important;stroke-linejoin:round!important}',
+'#services .service .n{color:#c8ff64!important;background:rgba(8,12,14,.58)!important;border:1px solid rgba(184,255,59,.24)!important;border-radius:999px!important;padding:7px 10px!important}',
+'#services .service h3{position:relative!important;margin:0 0 9px!important;font-size:clamp(17px,1.5vw,21px)!important;text-shadow:0 3px 16px #000!important}',
+'#services .service h3:after{content:""!important;display:block!important;width:34px!important;height:2px!important;margin-top:10px!important;background:#b8ff3b!important;border-radius:2px!important}',
+'#services .service p{color:#d0d5d8!important;text-shadow:0 3px 14px #000!important}',
+'#services .service .arrow{color:#b8ff3b!important}',
+'@media(max-width:1000px){#services .service-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}',
+'@media(max-width:620px){#services .service-grid{grid-template-columns:1fr!important;gap:12px!important}#services .service{min-height:0!important;border-radius:22px!important;padding:22px!important}}',
+'#contact{position:relative!important;overflow:hidden!important;border:1px solid rgba(184,255,59,.26)!important;border-radius:32px!important;background:linear-gradient(135deg,#171d20,#090c0e)!important;box-shadow:0 30px 90px rgba(0,0,0,.4),inset 0 1px rgba(255,255,255,.07)!important;padding:clamp(30px,5vw,64px)!important}',
+'#contact:before{content:""!important;position:absolute!important;inset:0!important;background:radial-gradient(circle at 10% 20%,rgba(184,255,59,.15),transparent 30%),radial-gradient(circle at 90% 80%,rgba(184,255,59,.07),transparent 28%)!important;pointer-events:none!important}',
+'#contact>*{position:relative!important;z-index:1!important}',
+'#contact a{display:flex!important;align-items:center!important;justify-content:space-between!important;min-height:58px!important;margin:12px 0!important;padding:14px 20px!important;border:1px solid rgba(255,255,255,.11)!important;border-radius:18px!important;background:rgba(255,255,255,.035)!important;color:#f5f7f8!important;transition:.25s ease!important}',
+'#contact a:after{content:"↗"!important;color:#b8ff3b!important;font-size:21px!important}',
+'#contact a:hover{transform:translateY(-4px)!important;border-color:rgba(184,255,59,.5)!important;background:rgba(184,255,59,.07)!important}',
+'#contact:after{content:"LET’S CREATE"!important;position:absolute!important;right:32px!important;bottom:24px!important;color:rgba(184,255,59,.48)!important;font-size:10px!important;letter-spacing:.3em!important;font-weight:800!important}'
+].join('');
+function patch(d){
+ if(!d||!d.head)return;
+ try{
+  var s=d.getElementById('farzad-final-css');
+  if(!s){s=d.createElement('style');s.id='farzad-final-css';d.head.appendChild(s);}
+  s.textContent=css;
+  d.querySelectorAll('.poster-card img').forEach(function(x){x.removeAttribute('srcset');x.removeAttribute('sizes');x.src=FINAL;x.alt='پوستر طلا و جواهر Classic — نسخه نهایی';});
+  var about=d.querySelector('#about .about-photo img');
+  if(about){about.removeAttribute('srcset');about.src='assets/about-personal.jpg?v=final';}
+  d.querySelectorAll('#services .service').forEach(function(card,i){
+   card.style.setProperty('background-image','linear-gradient(120deg,rgba(7,10,12,.78),rgba(7,10,12,.18)),url("'+imgs[i]+'")','important');
+   if(!card.querySelector('.service-icon')){
+    var box=d.createElement('div');box.className='service-icon';box.innerHTML=icons[i]||icons[8];
+    var n=card.querySelector('.n');if(n)n.insertAdjacentElement('afterend',box);else card.prepend(box);
    }
-   function patchEverywhere(root){
-   try{
-     if(!root)return;
-     const FINAL='https://github.com/user-attachments/assets/3d49b504-bdc3-405f-84a0-7fbe848a8089?v=20260919-final-3';
-     const posterCSS=root.getElementById('farzad-final-overrides')||root.createElement('style');
-     posterCSS.id='farzad-final-overrides';
-     posterCSS.textContent=\`
-#services .service{background-image:none!important;background:#111518!important}
-#services .service .service-visual{display:none!important}
-#services .service:nth-child(1){background-image:linear-gradient(120deg,rgba(7,10,12,.78),rgba(7,10,12,.18)),url('https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=1200&q=88')!important}
-#services .service:nth-child(2){background-image:linear-gradient(120deg,rgba(7,10,12,.78),rgba(7,10,12,.18)),url('https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=88')!important}
-#services .service:nth-child(3){background-image:linear-gradient(120deg,rgba(7,10,12,.78),rgba(7,10,12,.18)),url('https://images.unsplash.com/photo-1634942536790-2534a7f4a9f5?auto=format&fit=crop&w=1200&q=88')!important}
-#services .service:nth-child(4){background-image:linear-gradient(120deg,rgba(7,10,12,.78),rgba(7,10,12,.18)),url('https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1200&q=88')!important}
-#services .service:nth-child(5){background-image:linear-gradient(120deg,rgba(7,10,12,.78),rgba(7,10,12,.18)),url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=88')!important}
-#services .service:nth-child(6){background-image:linear-gradient(120deg,rgba(7,10,12,.78),rgba(7,10,12,.18)),url('https://images.unsplash.com/photo-1504270997636-07ddfbd48945?auto=format&fit=crop&w=1200&q=88')!important}
-#services .service:nth-child(7){background-image:linear-gradient(120deg,rgba(7,10,12,.78),rgba(7,10,12,.18)),url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1200&q=88')!important}
-#services .service:nth-child(8){background-image:linear-gradient(120deg,rgba(7,10,12,.78),rgba(7,10,12,.18)),url('https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&w=1200&q=88')!important}
-#services .service:nth-child(9){background-image:linear-gradient(120deg,rgba(7,10,12,.78),rgba(7,10,12,.18)),url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1200&q=88')!important}
-#contact{position:relative!important;overflow:hidden!important;border:1px solid rgba(184,255,59,.24)!important;border-radius:32px!important;background:linear-gradient(135deg,#171d20 0%,#090c0e 100%)!important;box-shadow:0 30px 90px rgba(0,0,0,.38),inset 0 1px rgba(255,255,255,.07)!important;padding:clamp(30px,5vw,64px)!important}
-#contact:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 10% 20%,rgba(184,255,59,.15),transparent 30%),radial-gradient(circle at 90% 80%,rgba(184,255,59,.07),transparent 28%);pointer-events:none}
-#contact:after{content:"LET’S CREATE";position:absolute;right:32px;bottom:24px;color:rgba(184,255,59,.48);font-size:10px;letter-spacing:.3em;font-weight:800;pointer-events:none}
-#contact>*{position:relative;z-index:1}
-#contact a{display:flex!important;align-items:center!important;justify-content:space-between!important;min-height:58px!important;margin:12px 0!important;padding:14px 20px!important;border:1px solid rgba(255,255,255,.1)!important;border-radius:18px!important;background:rgba(255,255,255,.035)!important;color:#f5f7f8!important;transition:.25s ease!important}
-#contact a:after{content:"↗";color:#b8ff3b;font-size:21px;font-weight:700}
-#contact a:hover{transform:translateY(-4px)!important;border-color:rgba(184,255,59,.5)!important;background:rgba(184,255,59,.07)!important;box-shadow:0 16px 34px rgba(0,0,0,.28)!important}
-\`;
-     if(!root.getElementById('farzad-final-overrides'))root.head.appendChild(posterCSS);
-     root.querySelectorAll('.poster-card img').forEach(img=>{img.removeAttribute('srcset');img.removeAttribute('sizes');if(img.src!==FINAL)img.src=FINAL;img.alt='پوستر طلا و جواهر Classic — نسخه نهایی';});
-     patchDocument(root);
-     root.querySelectorAll('iframe').forEach(fr=>{const run=()=>patchEverywhere(fr.contentDocument);fr.addEventListener('load',run);if(fr.contentDocument)run();});
-   }catch(e){console.warn('final portfolio override',e);}
- }
- function patchNested(){try{patchEverywhere(frame.contentDocument);}catch(e){}}
-
- frame.addEventListener('load',patchNested);
+  });
+  d.querySelectorAll('iframe').forEach(function(f){
+   try{f.addEventListener('load',function(){patch(f.contentDocument);});if(f.contentDocument)patch(f.contentDocument);}catch(e){}
+  });
+ }catch(e){}
+}
+frame.addEventListener('load',function(){patch(frame.contentDocument);});
+setTimeout(function(){patch(frame.contentDocument);},1000);
+setTimeout(function(){patch(frame.contentDocument);},3000);
 })();
 </script>
 </body>
