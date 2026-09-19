@@ -5,22 +5,59 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#050505">
 <title>Farzad Najafi — Portfolio</title>
-<style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}#portfolio{display:block;width:100%;height:100%;border:0;background:#050505}</style>
+<style>
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
+#portfolio{display:block;width:100%;height:100%;border:0;background:#050505}
+</style>
 </head>
 <body>
 <iframe id="portfolio" src="portfolio-original.html" title="Farzad Najafi Portfolio"></iframe>
 <script>
 (function(){
  const frame=document.getElementById('portfolio');
+ const serviceIcons=[
+ '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 34 20 10h8l12 24M13 26h22M18 34l6-12 6 12"/></svg>',
+ '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 6 40 15v18L24 42 8 33V15zM8 15l16 9 16-9M24 24v18"/></svg>',
+ '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 7 39 20 24 41 9 20zM9 20h30M18 20l6 21 6-21M18 12h12"/></svg>',
+ '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M9 12h30v24H9zM15 19h18M15 25h12M15 31h8M34 7v10M29 12h10"/></svg>',
+ '<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="7" y="10" width="34" height="27" rx="4"/><path d="M7 17h34M14 13.5h.1M19 13.5h.1M16 25h16M16 30h10"/></svg>',
+ '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 6 41 17v14L24 42 7 31V17zM17 24h14M24 17v14"/></svg>',
+ '<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="8" y="8" width="32" height="32" rx="9"/><circle cx="24" cy="24" r="8"/><path d="M34 14h.1"/></svg>',
+ '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 16 24 7l16 9v16l-16 9L8 32zM8 16l16 9 16-9M24 25v16M16 12l16 9"/></svg>',
+ '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 6v36M6 24h36M11 11l26 26M37 11 11 37"/><circle cx="24" cy="24" r="14"/></svg>'
+ ];
+ const serviceCSS=`
+ #services .service-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:stretch}
+ #services .service{isolation:isolate;min-height:228px;padding:25px 25px 28px;border:1px solid rgba(160,180,190,.16);border-radius:25px;background:linear-gradient(145deg,rgba(28,39,45,.88),rgba(13,16,20,.96));box-shadow:0 12px 35px rgba(0,0,0,.14);transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease}
+ #services .service:before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,#a6ff00,rgba(0,190,255,.45),transparent);opacity:.8}
+ #services .service:after{content:"";position:absolute;z-index:-1;width:150px;height:150px;left:-55px;bottom:-65px;border-radius:50%;background:radial-gradient(circle,rgba(166,255,0,.11),transparent 70%);pointer-events:none}
+ #services .service:hover{transform:translateY(-7px);border-color:rgba(166,255,0,.45);box-shadow:0 20px 45px rgba(0,0,0,.28),0 0 25px rgba(166,255,0,.06);background:linear-gradient(145deg,rgba(31,45,48,.98),rgba(12,17,21,.98))}
+ #services .service .n{position:absolute;top:22px;left:23px;font-size:11px;letter-spacing:.12em;color:#b3ff28;background:rgba(166,255,0,.08);border:1px solid rgba(166,255,0,.19);border-radius:9px;padding:6px 9px}
+ #services .service .service-icon{width:58px;height:58px;display:grid;place-items:center;border-radius:17px;margin-bottom:22px;background:linear-gradient(145deg,rgba(166,255,0,.13),rgba(0,190,255,.07));border:1px solid rgba(166,255,0,.18);box-shadow:inset 0 1px rgba(255,255,255,.04)}
+ #services .service .service-icon svg{width:31px;height:31px;fill:none;stroke:#b5ff2e;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 7px rgba(166,255,0,.12))}
+ #services .service h3{font-size:clamp(16px,1.35vw,20px);margin:0 0 9px;line-height:1.7;position:relative}
+ #services .service p{font-size:12px;line-height:2;color:var(--muted);max-width:34ch;margin:0}
+ #services .service .arrow{left:23px;bottom:20px;font-size:20px;color:#b5ff2e;transition:transform .25s ease}
+ #services .service:hover .arrow{transform:translate(-3px,-3px)}
+ @media(max-width:1000px){#services .service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#services .service{min-height:215px}}
+ @media(max-width:620px){#services .service-grid{grid-template-columns:1fr;gap:12px}#services .service{min-height:0;padding:22px 20px 24px;border-radius:21px}#services .service .service-icon{width:50px;height:50px;margin-bottom:16px;border-radius:15px}#services .service .service-icon svg{width:27px;height:27px}#services .service .n{top:18px;left:18px}#services .service h3{font-size:18px;margin-bottom:6px}#services .service p{font-size:12px;padding-left:15px}#services .service .arrow{left:18px;bottom:17px}}
+ @media(prefers-reduced-motion:reduce){#services .service,#services .service .arrow{transition:none}}
+ `;
  function patch(){
   try{
-   const d=frame.contentDocument;
-   if(!d) return;
-   const poster=d.querySelector('#works .poster-card img, .poster-card img');
-   if(poster){poster.removeAttribute('srcset');poster.src='https://github.com/user-attachments/assets/3d49b504-bdc3-405f-84a0-7fbe848a8089';poster.alt='پوستر به‌روزشده طلا و جواهر Classic';}
+   const d=frame.contentDocument;if(!d)return;
+   if(!d.getElementById('premium-service-cards')){const style=d.createElement('style');style.id='premium-service-cards';style.textContent=serviceCSS;d.head.appendChild(style)}
    const about=d.querySelector('#about .about-photo img');
-   if(about){about.removeAttribute('srcset');about.src='assets/about-personal.jpg?v=20260919';about.alt='Farzad Najafi';about.style.objectFit='cover';about.style.objectPosition='center center';}
-  }catch(e){console.error('Portfolio image patch failed',e);}
+   if(about){about.removeAttribute('srcset');about.src='assets/about-personal.jpg?v=20260919';about.alt='Farzad Najafi';about.style.objectFit='cover';about.style.objectPosition='center center'}
+   const poster=d.querySelector('.poster-card img');
+   if(poster){poster.removeAttribute('srcset');poster.src='https://github.com/user-attachments/assets/3d49b504-bdc3-405f-84a0-7fbe848a8089';poster.alt='پوستر طلا و جواهر Classic — نسخه اصلاح‌شده'}
+   d.querySelectorAll('#services .service').forEach((card,i)=>{
+    if(card.querySelector('.service-icon'))return;
+    const icon=d.createElement('div');icon.className='service-icon';icon.innerHTML=serviceIcons[i]||serviceIcons[8];
+    const number=card.querySelector('.n');
+    if(number)number.insertAdjacentElement('afterend',icon);else card.prepend(icon);
+   });
+  }catch(e){console.error('Portfolio enhancements failed',e)}
  }
  frame.addEventListener('load',patch);
 })();
