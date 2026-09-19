@@ -99,17 +99,20 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
       }
     }catch(e){console.error('Portfolio patch failed',e);}
    }
-   function patchNested(){
-    try{
-      const outerDoc=frame.contentDocument;if(!outerDoc)return;
-      const inner=outerDoc.querySelector('iframe');
-      if(inner){
-        const run=()=>{patchDocument(inner.contentDocument);};
-        inner.addEventListener('load',run,{once:false});
-        if(inner.contentDocument && inner.contentDocument.readyState==='complete')run();
-      }else patchDocument(outerDoc);
-    }catch(e){console.error('Nested portfolio access failed',e);}
-   }
+   function patchEverywhere(root){
+   try{
+     if(!root)return;
+     patchDocument(root);
+     const poster=root.querySelectorAll('.poster-card img');
+     poster.forEach(img=>{img.removeAttribute('srcset');img.removeAttribute('sizes');img.src='https://github.com/user-attachments/assets/3d49b504-bdc3-405f-84a0-7fbe848a8089?v=20260919-final-2';img.alt='پوستر طلا و جواهر Classic — نسخه نهایی';});
+     const contact=root.querySelector('#contact');
+     if(contact && !root.getElementById('farzad-contact-force')){
+       const cs=root.createElement('style');cs.id='farzad-contact-force';cs.textContent=\`#contact{position:relative!important;overflow:hidden!important;border:1px solid rgba(184,255,59,.24)!important;border-radius:30px!important;background:linear-gradient(135deg,#151a1d,#0a0d0f)!important;box-shadow:0 24px 70px rgba(0,0,0,.34),inset 0 1px rgba(255,255,255,.06)!important;padding:clamp(28px,4vw,52px)!important}#contact:before{content:"";position:absolute;inset:-35%;background:radial-gradient(circle at 18% 28%,rgba(184,255,59,.14),transparent 25%),radial-gradient(circle at 82% 72%,rgba(184,255,59,.055),transparent 22%);pointer-events:none}#contact>*{position:relative;z-index:1}#contact a{transition:all .25s ease!important}#contact a:hover{transform:translateY(-3px)!important;border-color:rgba(184,255,59,.45)!important;box-shadow:0 14px 30px rgba(0,0,0,.25)!important}\`;root.head.appendChild(cs);
+     }
+     root.querySelectorAll('iframe').forEach(fr=>{const run=()=>patchEverywhere(fr.contentDocument);fr.addEventListener('load',run);if(fr.contentDocument)run();});
+   }catch(e){console.warn('recursive portfolio patch',e);}
+ }
+ function patchNested(){try{patchEverywhere(frame.contentDocument);}catch(e){console.warn('Nested portfolio access failed',e);}}
  frame.addEventListener('load',patchNested);
 })();
 </script>
