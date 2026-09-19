@@ -9,7 +9,8 @@
 <script>
 (function(){const frame=document.getElementById('site');frame.addEventListener('load',function(){try{const d=frame.contentDocument;if(!d)return;
 const aboutImg=d.querySelector('#about .about-photo img');if(aboutImg){aboutImg.src='assets/about-personal.jpg';aboutImg.alt='Farzad Najafi';aboutImg.style.objectFit='cover';aboutImg.style.objectPosition='center center';}
-const projectImg=d.querySelector('.poster-card img');if(projectImg){projectImg.src='https://github.com/user-attachments/assets/3d49b504-bdc3-405f-84a0-7fbe848a8089';projectImg.alt='پوستر طلا و جواهر Classic — نسخه اصلاح‌شده';}
+const projectImg=d.querySelector('.poster-card img');if(projectImg){projectImg.removeAttribute('srcset');projectImg.removeAttribute('sizes');projectImg.src='https://github.com/user-attachments/assets/3d49b504-bdc3-405f-84a0-7fbe848a8089?v=20260919-final';projectImg.alt='پوستر طلا و جواهر Classic — نسخه نهایی';}
+d.querySelectorAll('.poster-card img').forEach(function(img){img.removeAttribute('srcset');img.removeAttribute('sizes');img.setAttribute('src','https://github.com/user-attachments/assets/3d49b504-bdc3-405f-84a0-7fbe848a8089?v=20260919-final');img.alt='پوستر طلا و جواهر Classic — نسخه نهایی';});
 const photos=[
 ['https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=900&q=82','میز کار طراحی گرافیک'],
 ['https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=900&q=82','چاپ و هویت بصری برند'],
