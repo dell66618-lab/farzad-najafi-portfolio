@@ -19,6 +19,13 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
     try{
       const d=frame.contentDocument;
       if(!d) return;
+      const aboutImg=d.querySelector('#about .about-photo img');
+      if(aboutImg){
+        aboutImg.src='assets/about-personal.jpg';
+        aboutImg.alt='Farzad Najafi';
+        aboutImg.style.objectFit='cover';
+        aboutImg.style.objectPosition='center center';
+      }
       const s=d.createElement('style');
       s.id='farzad-mobile-fix';
       s.textContent=`
