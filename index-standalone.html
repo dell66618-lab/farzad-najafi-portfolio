@@ -14,20 +14,38 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
 <iframe id="portfolio" src="portfolio-original.html" title="Farzad Najafi Portfolio"></iframe>
 <script>
 (function(){
-  const frame=document.getElementById('portfolio');
-  frame.addEventListener('load',function(){
+  const outer=document.getElementById('portfolio');
+  function patchDocument(d){
+    if(!d) return;
     try{
-      const d=frame.contentDocument;
-      if(!d) return;
       const photo=d.querySelector('#about .about-photo img');
       if(photo){
         photo.removeAttribute('srcset');
         photo.src='assets/about-personal.jpg?v=20260919';
         photo.alt='Farzad Najafi';
+        photo.style.objectFit='cover';
         photo.style.objectPosition='center center';
       }
-    }catch(e){console.error('Portfolio image replacement failed',e);}
-  });
+      const poster=d.querySelector('.poster-card img');
+      if(poster){
+        poster.removeAttribute('srcset');
+        poster.src='https://github.com/user-attachments/assets/3d49b504-bdc3-405f-84a0-7fbe848a8089';
+        poster.alt='پوستر طلا و جواهر Classic — نسخه اصلاح‌شده';
+      }
+    }catch(e){console.error('Portfolio patch failed',e);}
+  }
+  function patchNested(){
+    try{
+      const outerDoc=outer.contentDocument;
+      if(!outerDoc) return;
+      const inner=outerDoc.querySelector('iframe');
+      if(inner){
+        inner.addEventListener('load',()=>patchDocument(inner.contentDocument),{once:true});
+        if(inner.contentDocument && inner.contentDocument.readyState==='complete') patchDocument(inner.contentDocument);
+      } else patchDocument(outerDoc);
+    }catch(e){console.error('Nested portfolio access failed',e);}
+  }
+  outer.addEventListener('load',patchNested);
 })();
 </script>
 </body>
