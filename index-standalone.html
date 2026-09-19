@@ -26,7 +26,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
  '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 16 24 7l16 9v16l-16 9L8 32zM8 16l16 9 16-9M24 25v16M16 12l16 9"/></svg>',
  '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 6v36M6 24h36M11 11l26 26M37 11 11 37"/><circle cx="24" cy="24" r="14"/></svg>'
  ];
- const serviceCSS=\`
+ const serviceCSS=`
  #services .service-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
  #services .service{isolation:isolate;position:relative;overflow:hidden;min-height:250px;padding:27px 27px 30px;border:1px solid rgba(255,255,255,.12);border-radius:27px;background:#111518 center/cover no-repeat;box-shadow:0 16px 42px rgba(0,0,0,.18),inset 0 1px rgba(255,255,255,.035);transition:transform .35s cubic-bezier(.2,.75,.2,1),border-color .35s ease,box-shadow .35s ease;background-position:center}
  #services .service:nth-child(1){background-image:linear-gradient(120deg,rgba(7,10,12,.95) 5%,rgba(7,10,12,.72) 48%,rgba(7,10,12,.28)),url('https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=1200&q=88')}
@@ -53,7 +53,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
  @media(max-width:1000px){#services .service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#services .service{min-height:225px}}
  @media(max-width:620px){#services .service-grid{grid-template-columns:1fr;gap:12px}#services .service{min-height:0;padding:22px 20px 25px;border-radius:22px;background-position:center 45%}#services .service .service-icon{width:52px;height:52px;margin-bottom:17px;border-radius:15px}#services .service .service-icon svg{width:28px;height:28px}#services .service .n{top:18px;left:18px}#services .service h3{font-size:18px;margin-bottom:6px}#services .service p{font-size:12px;padding-left:15px}#services .service .arrow{left:18px;bottom:17px}}
  @media(prefers-reduced-motion:reduce){#services .service,#services .service .arrow{transition:none}}
-\`
+`;
  function patchDocument(d){
     if(!d)return;
     try{
