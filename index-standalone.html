@@ -102,17 +102,37 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
    function patchEverywhere(root){
    try{
      if(!root)return;
+     const FINAL='https://github.com/user-attachments/assets/3d49b504-bdc3-405f-84a0-7fbe848a8089?v=20260919-final-3';
+     const posterCSS=root.getElementById('farzad-final-overrides')||root.createElement('style');
+     posterCSS.id='farzad-final-overrides';
+     posterCSS.textContent=\`
+#services .service{background-image:none!important;background:#111518!important}
+#services .service .service-visual{display:none!important}
+#services .service:nth-child(1){background-image:linear-gradient(120deg,rgba(7,10,12,.78),rgba(7,10,12,.18)),url('https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=1200&q=88')!important}
+#services .service:nth-child(2){background-image:linear-gradient(120deg,rgba(7,10,12,.78),rgba(7,10,12,.18)),url('https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=88')!important}
+#services .service:nth-child(3){background-image:linear-gradient(120deg,rgba(7,10,12,.78),rgba(7,10,12,.18)),url('https://images.unsplash.com/photo-1634942536790-2534a7f4a9f5?auto=format&fit=crop&w=1200&q=88')!important}
+#services .service:nth-child(4){background-image:linear-gradient(120deg,rgba(7,10,12,.78),rgba(7,10,12,.18)),url('https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1200&q=88')!important}
+#services .service:nth-child(5){background-image:linear-gradient(120deg,rgba(7,10,12,.78),rgba(7,10,12,.18)),url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=88')!important}
+#services .service:nth-child(6){background-image:linear-gradient(120deg,rgba(7,10,12,.78),rgba(7,10,12,.18)),url('https://images.unsplash.com/photo-1504270997636-07ddfbd48945?auto=format&fit=crop&w=1200&q=88')!important}
+#services .service:nth-child(7){background-image:linear-gradient(120deg,rgba(7,10,12,.78),rgba(7,10,12,.18)),url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1200&q=88')!important}
+#services .service:nth-child(8){background-image:linear-gradient(120deg,rgba(7,10,12,.78),rgba(7,10,12,.18)),url('https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&w=1200&q=88')!important}
+#services .service:nth-child(9){background-image:linear-gradient(120deg,rgba(7,10,12,.78),rgba(7,10,12,.18)),url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1200&q=88')!important}
+#contact{position:relative!important;overflow:hidden!important;border:1px solid rgba(184,255,59,.24)!important;border-radius:32px!important;background:linear-gradient(135deg,#171d20 0%,#090c0e 100%)!important;box-shadow:0 30px 90px rgba(0,0,0,.38),inset 0 1px rgba(255,255,255,.07)!important;padding:clamp(30px,5vw,64px)!important}
+#contact:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 10% 20%,rgba(184,255,59,.15),transparent 30%),radial-gradient(circle at 90% 80%,rgba(184,255,59,.07),transparent 28%);pointer-events:none}
+#contact:after{content:"LET’S CREATE";position:absolute;right:32px;bottom:24px;color:rgba(184,255,59,.48);font-size:10px;letter-spacing:.3em;font-weight:800;pointer-events:none}
+#contact>*{position:relative;z-index:1}
+#contact a{display:flex!important;align-items:center!important;justify-content:space-between!important;min-height:58px!important;margin:12px 0!important;padding:14px 20px!important;border:1px solid rgba(255,255,255,.1)!important;border-radius:18px!important;background:rgba(255,255,255,.035)!important;color:#f5f7f8!important;transition:.25s ease!important}
+#contact a:after{content:"↗";color:#b8ff3b;font-size:21px;font-weight:700}
+#contact a:hover{transform:translateY(-4px)!important;border-color:rgba(184,255,59,.5)!important;background:rgba(184,255,59,.07)!important;box-shadow:0 16px 34px rgba(0,0,0,.28)!important}
+\`;
+     if(!root.getElementById('farzad-final-overrides'))root.head.appendChild(posterCSS);
+     root.querySelectorAll('.poster-card img').forEach(img=>{img.removeAttribute('srcset');img.removeAttribute('sizes');if(img.src!==FINAL)img.src=FINAL;img.alt='پوستر طلا و جواهر Classic — نسخه نهایی';});
      patchDocument(root);
-     const poster=root.querySelectorAll('.poster-card img');
-     poster.forEach(img=>{img.removeAttribute('srcset');img.removeAttribute('sizes');img.src='https://github.com/user-attachments/assets/3d49b504-bdc3-405f-84a0-7fbe848a8089?v=20260919-final-2';img.alt='پوستر طلا و جواهر Classic — نسخه نهایی';});
-     const contact=root.querySelector('#contact');
-     if(contact && !root.getElementById('farzad-contact-force')){
-       const cs=root.createElement('style');cs.id='farzad-contact-force';cs.textContent=\`#contact{position:relative!important;overflow:hidden!important;border:1px solid rgba(184,255,59,.24)!important;border-radius:30px!important;background:linear-gradient(135deg,#151a1d,#0a0d0f)!important;box-shadow:0 24px 70px rgba(0,0,0,.34),inset 0 1px rgba(255,255,255,.06)!important;padding:clamp(28px,4vw,52px)!important}#contact:before{content:"";position:absolute;inset:-35%;background:radial-gradient(circle at 18% 28%,rgba(184,255,59,.14),transparent 25%),radial-gradient(circle at 82% 72%,rgba(184,255,59,.055),transparent 22%);pointer-events:none}#contact>*{position:relative;z-index:1}#contact a{transition:all .25s ease!important}#contact a:hover{transform:translateY(-3px)!important;border-color:rgba(184,255,59,.45)!important;box-shadow:0 14px 30px rgba(0,0,0,.25)!important}\`;root.head.appendChild(cs);
-     }
      root.querySelectorAll('iframe').forEach(fr=>{const run=()=>patchEverywhere(fr.contentDocument);fr.addEventListener('load',run);if(fr.contentDocument)run();});
-   }catch(e){console.warn('recursive portfolio patch',e);}
+   }catch(e){console.warn('final portfolio override',e);}
  }
- function patchNested(){try{patchEverywhere(frame.contentDocument);}catch(e){console.warn('Nested portfolio access failed',e);}}
+ function patchNested(){try{patchEverywhere(frame.contentDocument);}catch(e){}}
+
  frame.addEventListener('load',patchNested);
 })();
 </script>
