@@ -55,6 +55,7 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
  function patchDocument(d){
     if(!d)return;
     try{
+      if(!d.getElementById('premium-service-cards')){const style=d.createElement('style');style.id='premium-service-cards';style.textContent=serviceCSS;(d.head||d.documentElement).appendChild(style);}
       const about=d.querySelector('#about .about-photo img');
       if(about){about.removeAttribute('srcset');about.src='assets/about-personal.jpg?v=20260919';about.alt='Farzad Najafi';about.style.objectFit='cover';about.style.objectPosition='center center';}
       const poster=d.querySelector('#works .poster-card img,.poster-card img');
