@@ -31,33 +31,46 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
         projectImg.src='https://github.com/user-attachments/assets/3d49b504-bdc3-405f-84a0-7fbe848a8089';
         projectImg.alt='پوستر طلا و جواهر Classic — نسخه اصلاح‌شده';
       }
+      const services=d.querySelectorAll('#services .service');
+      const photos=[
+        ['https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=900&q=82','میز کار طراحی گرافیک'],
+        ['https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=900&q=82','چاپ و هویت بصری برند'],
+        ['https://images.unsplash.com/photo-1634942536790-253 ರೂಪ?auto=format&fit=crop&w=900&q=82','طراحی لوگو'],
+        ['https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=82','استودیوی تولید محتوا'],
+        ['https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=900&q=82','طراحی بنر دیجیتال'],
+        ['https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=900&q=82','چاپ و پوستر'],
+        ['https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=900&q=82','محتوای شبکه‌های اجتماعی'],
+        ['https://images.unsplash.com/photo-155 branding?auto=format&fit=crop&w=900&q=82','برندینگ'],
+        ['https://images.unsplash.com/photo-1455390582262-044cзам?auto=format&fit=crop&w=900&q=82','پروژه اختصاصی']
+      ];
+      services.forEach((card,i)=>{
+        if(card.querySelector('.service-visual')) return;
+        const visual=d.createElement('div');
+        visual.className='service-visual';
+        const img=d.createElement('img');
+        img.src=photos[i][0]; img.alt=photos[i][1]; img.loading='lazy';
+        visual.appendChild(img);
+        const shade=d.createElement('span'); shade.className='service-shade'; visual.appendChild(shade);
+        card.prepend(visual);
+        card.classList.add('service-photo-card');
+      });
       const s=d.createElement('style');
-      s.id='farzad-mobile-fix';
+      s.id='farzad-services-photo-design';
       s.textContent=`
-        @media (max-width:620px){
-          html,body{overflow-x:hidden!important}
-          #ambient{display:block!important}
-          #ambient .float{display:block!important;opacity:.48!important;filter:drop-shadow(0 10px 22px rgba(0,0,0,.45))!important;pointer-events:none!important}
-          #ambient .f1{width:76px!important;left:-20px!important;top:16%!important}
-          #ambient .f2{width:86px!important;right:-10px!important;top:9%!important}
-          #ambient .f3{width:58px!important;left:2%!important;top:69%!important}
-          #ambient .f4{width:70px!important;right:2%!important;top:55%!important}
-          #ambient .f5{width:54px!important;right:25%!important;top:22%!important}
-          #ambient .f6{width:72px!important;left:27%!important;top:73%!important}
-          .glass{backdrop-filter:blur(16px) saturate(135%)!important;-webkit-backdrop-filter:blur(16px) saturate(135%)!important}
-          .hero-visual{min-height:440px!important}
-          .motion-shell{inset:9% -7% 4%!important}
-          .portrait-wrap{height:450px!important;width:92%!important}
-          .glass-label{right:-2%!important;bottom:9%!important;min-width:175px!important}
-          section{padding:78px 0!important}
-          .section-title{font-size:clamp(34px,10vw,52px)!important}
-          .about-copy{padding:28px!important}
-          .about-photo{height:430px!important}
-          .quote{font-size:17px!important;line-height:2!important}
-          .service{min-height:170px!important}
-          .order-intro h2{font-size:42px!important}
-          .mobile-panel{padding-top:92px!important}
-        }
+        #services .service-grid{gap:16px}
+        #services .service-photo-card{min-height:300px;padding:0 23px 23px;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;background:#101216!important;border:1px solid rgba(255,255,255,.11);isolation:isolate;transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease}
+        #services .service-photo-card:hover{transform:translateY(-5px);border-color:rgba(181,255,46,.38);box-shadow:0 18px 44px rgba(0,0,0,.24)}
+        #services .service-visual{position:absolute;inset:0 0 auto;height:64%;overflow:hidden;z-index:-1;background:#171a1d}
+        #services .service-visual img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.72) contrast(1.02);transition:transform .65s ease,filter .4s ease}
+        #services .service-photo-card:hover .service-visual img{transform:scale(1.045);filter:saturate(.9) contrast(1.04)}
+        #services .service-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,7,9,.02) 0%,rgba(8,10,12,.08) 32%,rgba(12,14,17,.72) 72%,#101216 100%)}
+        #services .service-photo-card .n{align-self:flex-end;position:relative;margin:0 0 6px;color:#b5ff2e;font-size:10px;letter-spacing:.16em}
+        #services .service-photo-card h3{position:relative;margin:0 0 7px;font-size:19px;color:#f5f6f8}
+        #services .service-photo-card p{position:relative;margin:0;max-width:95%;font-size:11px;line-height:1.9;color:rgba(235,239,244,.72)}
+        #services .service-photo-card .arrow{left:20px;bottom:19px;color:#b5ff2e}
+        @media(max-width:1000px){#services .service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+        @media(max-width:620px){#services .service-grid{grid-template-columns:1fr;gap:13px}#services .service-photo-card{min-height:255px;padding:0 20px 20px;border-radius:20px}#services .service-visual{height:70%}#services .service-photo-card h3{font-size:18px}#services .service-photo-card p{font-size:11px}}
+        @media(prefers-reduced-motion:reduce){#services .service-photo-card,#services .service-visual img{transition:none}}
       `;
       d.head.appendChild(s);
       const v=d.querySelector('video');
