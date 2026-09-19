@@ -67,6 +67,21 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050505}
         const icon=d.createElement('div');icon.className='service-icon';icon.innerHTML=serviceIcons[i]||serviceIcons[8];
         const number=card.querySelector('.n'); if(number)number.insertAdjacentElement('afterend',icon); else card.prepend(icon);
       });
+      const contact=d.querySelector('#contact');
+      if(contact && !d.getElementById('farzad-contact-final')){
+        const cs=d.createElement('style');cs.id='farzad-contact-final';cs.textContent=`
+#contact{position:relative;overflow:hidden!important;border:1px solid rgba(184,255,59,.24)!important;border-radius:30px!important;background:linear-gradient(135deg,#151a1d 0%,#0a0d0f 100%)!important;box-shadow:0 24px 70px rgba(0,0,0,.34),inset 0 1px rgba(255,255,255,.06)!important;padding:clamp(28px,4vw,52px)!important}
+#contact:before{content:"";position:absolute;inset:-35%;background:radial-gradient(circle at 18% 28%,rgba(184,255,59,.14),transparent 25%),radial-gradient(circle at 82% 72%,rgba(184,255,59,.055),transparent 22%);pointer-events:none}
+#contact>*{position:relative;z-index:1}
+#contact h2,#contact h3{font-size:clamp(25px,3vw,38px)!important;letter-spacing:-.02em;margin-bottom:12px!important}
+#contact a{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:14px!important;min-height:58px!important;padding:14px 18px!important;margin:10px 0!important;border:1px solid rgba(255,255,255,.11)!important;border-radius:16px!important;background:rgba(255,255,255,.035)!important;color:#f4f6f7!important;text-decoration:none!important;transition:all .25s ease!important}
+#contact a:hover{transform:translateY(-3px)!important;border-color:rgba(184,255,59,.45)!important;background:rgba(184,255,59,.07)!important;box-shadow:0 14px 30px rgba(0,0,0,.25),0 0 22px rgba(184,255,59,.06)!important}
+#contact a::after{content:"↗";color:#b8ff3b;font-size:20px;font-weight:700}
+#contact:after{content:"LET’S CREATE SOMETHING GREAT";position:absolute;right:28px;bottom:20px;color:rgba(184,255,59,.42);font-size:9px;letter-spacing:.2em;pointer-events:none}
+@media(max-width:620px){#contact{border-radius:22px!important;padding:24px 18px!important}#contact a{min-height:52px!important;font-size:13px!important}#contact:after{font-size:7px;right:18px;bottom:13px}}
+`;d.head.appendChild(cs);
+        const links=[...contact.querySelectorAll('a')];links.forEach(a=>{a.setAttribute('aria-label',a.textContent.trim()||'ارتباط با فرزاد نجفی');});
+      }
     }catch(e){console.error('Portfolio patch failed',e);}
    }
    function patchNested(){
