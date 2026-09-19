@@ -39,4 +39,41 @@ const s=d.createElement('style');s.id='farzad-services-photo-design';s.textConte
 @media(prefers-reduced-motion:reduce){#services .service-photo-card,#services .service-visual img{transition:none}}`;
 d.head.appendChild(s);const v=d.querySelector('video');if(v){v.setAttribute('playsinline','');v.setAttribute('webkit-playsinline','');}
 }catch(e){console.error('Portfolio enhancement failed',e);}});})();
+</script><script>
+(function(){
+function enhance(d){
+  if(!d||d.getElementById('farzad-contact-enhancement'))return;
+  const style=d.createElement('style');style.id='farzad-contact-enhancement';style.textContent=`
+#contact{position:relative;overflow:hidden;border:1px solid rgba(181,255,46,.18)!important;border-radius:30px!important;background:linear-gradient(135deg,rgba(20,25,28,.98),rgba(9,12,14,.96))!important;box-shadow:0 22px 65px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.05)!important}
+#contact:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 15% 25%,rgba(181,255,46,.12),transparent 32%),linear-gradient(120deg,transparent 45%,rgba(255,255,255,.025));pointer-events:none}
+#contact:after{content:"LET'S CREATE";position:absolute;left:28px;bottom:24px;font-size:9px;letter-spacing:.22em;color:rgba(181,255,46,.48);font-weight:700;pointer-events:none}
+#contact a{transition:transform .25s ease,border-color .25s ease,background .25s ease,box-shadow .25s ease!important}
+#contact a:hover{transform:translateY(-3px);border-color:rgba(181,255,46,.45)!important;box-shadow:0 12px 28px rgba(0,0,0,.2),0 0 18px rgba(181,255,46,.05)}
+#farzad-contact-quick{position:fixed;z-index:99999;right:22px;bottom:22px;display:flex;align-items:center;gap:10px;padding:11px 13px 11px 17px;border:1px solid rgba(181,255,46,.32);border-radius:999px;background:rgba(12,16,18,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 12px 32px rgba(0,0,0,.28),0 0 25px rgba(181,255,46,.06);color:#f3f5f6;font:700 12px/1.2 inherit;cursor:pointer}
+#farzad-contact-quick i{width:9px;height:9px;border-radius:50%;background:#b5ff2e;box-shadow:0 0 12px rgba(181,255,46,.75);display:block}
+#farzad-contact-quick span{color:#b5ff2e}
+@media(max-width:620px){#farzad-contact-quick{right:13px;bottom:13px;padding:10px 12px 10px 14px;font-size:11px}}
+`;d.head.appendChild(style);
+  let contact=d.querySelector('#contact');
+  let target=contact||d.querySelector('footer')||d.body.lastElementChild;
+  const quick=d.createElement('button');quick.id='farzad-contact-quick';quick.type='button';quick.innerHTML='<i></i><span>در ارتباط باشیم</span> ↗';
+  quick.addEventListener('click',function(){const t=d.querySelector('#contact')||d.querySelector('footer');if(t)t.scrollIntoView({behavior:'smooth',block:'center'});});
+  d.body.appendChild(quick);
+  if(contact){
+    const heading=contact.querySelector('h1,h2,h3');
+    if(heading)heading.style.position='relative';
+  }
+}
+function reach(){
+ try{
+  const outer=document.getElementById('site');const od=outer&&outer.contentDocument;if(!od)return;
+  const inner=od.querySelector('iframe');
+  if(inner){
+    const run=()=>enhance(inner.contentDocument);
+    inner.addEventListener('load',run);run();
+  }else enhance(od);
+ }catch(e){console.warn('contact enhancement',e);}
+}
+const f=document.getElementById('site');if(f)f.addEventListener('load',reach);reach();
+})();
 </script></body></html>
